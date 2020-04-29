@@ -2,7 +2,7 @@
     <img src="src/assets/logo.svg">
 </h1>
 
-[![](https://res.cloudinary.com/marcomontalbano/image/upload/v1588196296/video_to_markdown/images/youtube--kNoC88gT2Wk-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/kNoC88gT2Wk)
+[![](https://res.cloudinary.com/marcomontalbano/image/upload/v1588196296/video_to_markdown/images/youtube--kNoC88gT2Wk-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/kNoC88gT2Wk)
 
 <h3 align="center">
     <a href="https://gobarber-translations.netlify.app/">Acessar a demonstração</a>
