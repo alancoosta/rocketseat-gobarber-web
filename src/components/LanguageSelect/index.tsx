@@ -9,8 +9,8 @@ const LanguageSelect: React.FC = () => {
   return (
     <Container value={locale} onChange={selectLang}>
       <option value="en-US">English</option>
-      <option value="es-MX">Spanish</option>
-      <option value="pt-BR">Portuguese</option>
+      <option value="es-MX">Espanol</option>
+      <option value="pt-BR">Português</option>
     </Container>
   );
 };
