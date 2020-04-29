@@ -130,7 +130,10 @@ const SignUp: React.FC = () => {
 
           <Link to="/">
             <FiArrowLeft />
-            Voltar para logon
+            <FormattedMessage
+              id="signup.buttonBackToLogon"
+              defaultMessage="Back to Login"
+            />
           </Link>
 
           <LanguageSelect />

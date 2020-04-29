@@ -8,5 +8,6 @@
   "signup.header": "Faça seu cadastro",
   "signup.inputPlaceholderName": "Nome",
   "signup.inputPlaceholderPassword": "Senha",
-  "signup.buttonSignUp": "Cadastrar"
+  "signup.buttonSignUp": "Cadastrar",
+  "signup.buttonBackToLogon": "Voltar para logon"
 }

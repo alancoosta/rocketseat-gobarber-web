@@ -8,5 +8,6 @@
   "signup.header": "Make your registration",
   "signup.inputPlaceholderName": "Name",
   "signup.inputPlaceholderPassword": "Password",
-  "signup.buttonSignUp": "Register"
+  "signup.buttonSignUp": "Register",
+  "signup.buttonBackToLogon": "Back to Login"
 }

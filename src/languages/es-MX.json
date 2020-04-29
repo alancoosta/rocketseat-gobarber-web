@@ -8,5 +8,6 @@
   "signup.header": "Haz tu registro",
   "signup.inputPlaceholderName": "Nombre",
   "signup.inputPlaceholderPassword": "Contraseña",
-  "signup.buttonSignUp": "Registrar"
+  "signup.buttonSignUp": "Registrar",
+  "signup.buttonBackToLogon": "Volver al inicio de sesión"
 }
