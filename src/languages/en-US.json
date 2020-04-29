@@ -1,0 +1,12 @@
+{
+  "signin.header": "Log in",
+  "signin.forgetPassword": "I my forgot my password",
+  "signin.createAccount": "Create an account",
+  "signin.inputPlaceholderPassword": "Password",
+  "signin.buttonSingIn": "Sign In",
+
+  "signup.header": "Make your registration",
+  "signup.inputPlaceholderName": "Name",
+  "signup.inputPlaceholderPassword": "Password",
+  "signup.buttonSignUp": "Register"
+}
