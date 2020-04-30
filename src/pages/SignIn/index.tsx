@@ -4,7 +4,8 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+
+import { useTranslation } from 'react-i18next';
 
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
@@ -15,7 +16,8 @@ import logo from '../../assets/logo.svg';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import LanguageSelect from '../../components/LanguageSelect';
+
+import SelectLanguage from '../../components/SelectLanguage';
 
 import { Container, Content, AnimationContainer, Background } from './styles';
 
@@ -26,6 +28,8 @@ interface SignInFormData {
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+
+  const { t } = useTranslation();
 
   const { signIn } = useAuth();
   const { addToast } = useToast();
@@ -39,9 +43,9 @@ const SignIn: React.FC = () => {
 
         const schema = Yup.object().shape({
           email: Yup.string()
-            .required('E-mail obrigatório')
-            .email('Digite um e-mail válido'),
-          password: Yup.string().required('Senha obrigatória'),
+            .required(`${t('Tooltip.emailRequired')}`)
+            .email(`${t('Tooltip.email')}`),
+          password: Yup.string().required(`${t('Tooltip.password')}`),
         });
 
         await schema.validate(data, {
@@ -67,12 +71,12 @@ const SignIn: React.FC = () => {
         // Disparar um toast
         addToast({
           type: 'error',
-          title: 'Erro na autenticação',
-          description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
+          title: `${t('ToastContainer.SignIn.error.title')}`,
+          description: `${t('ToastContainer.SignIn.error.description')}`,
         });
       }
     },
-    [signIn, addToast, history],
+    [signIn, addToast, history, t],
   );
 
   return (
@@ -81,54 +85,32 @@ const SignIn: React.FC = () => {
         <AnimationContainer>
           <img src={logo} alt="GoBarber" />
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>
-              <FormattedMessage
-                id="signin.header"
-                defaultMessage="Make your Logon"
-              />
-            </h1>
+            <h1>{t('SingIn.header')}</h1>
 
-            <Input name="email" icon={FiMail} placeholder="E-mail" />
+            <Input
+              name="email"
+              icon={FiMail}
+              placeholder={t('SingIn.inputPlaceholderEmail')}
+            />
 
-            <FormattedMessage
-              id="signin.inputPlaceholderPassword"
-              defaultMessage="Password"
-            >
-              {(placeholder: string) => (
-                <Input
-                  name="password"
-                  icon={FiLock}
-                  type="password"
-                  placeholder={placeholder}
-                />
-              )}
-            </FormattedMessage>
+            <Input
+              name="password"
+              icon={FiLock}
+              type="password"
+              placeholder={t('SingIn.inputPlaceholderPassword')}
+            />
 
-            <Button type="submit">
-              <FormattedMessage
-                id="signin.buttonSingIn"
-                defaultMessage="Sign In"
-              />
-            </Button>
+            <Button type="submit">{t('SingIn.createAccount')}</Button>
 
-            <a href="forgot">
-              <FormattedMessage
-                id="signin.forgetPassword"
-                defaultMessage="I my forgot my password"
-              />
-            </a>
+            <a href="forgot">{t('SingIn.forgetPassword')}</a>
           </Form>
 
           <Link to="/signup">
             <FiLogIn />
-
-            <FormattedMessage
-              id="signin.createAccount"
-              defaultMessage="Create an account"
-            />
+            <span>{t('SingIn.createAccount')}</span>
           </Link>
 
-          <LanguageSelect />
+          <SelectLanguage />
         </AnimationContainer>
       </Content>
 

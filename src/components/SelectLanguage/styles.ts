@@ -6,6 +6,7 @@ export const Container = styled.select`
   border: 0;
   color: #fff;
   font-family: 'Roboto Slab', serif;
+  font-size: 18px;
 
   option {
     background-color: #312e38;

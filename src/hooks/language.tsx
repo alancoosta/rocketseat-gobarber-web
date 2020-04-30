@@ -5,15 +5,12 @@ import React, {
   useCallback,
   useContext,
 } from 'react';
-import { IntlProvider } from 'react-intl';
 
-import English from '../languages/en-US.json';
-import Spanish from '../languages/es-MX.json';
-import Portuguese from '../languages/pt-BR.json';
+import i18next from 'i18next';
 
 interface LanguageContextData {
   locale: string;
-  selectLang: any;
+  handleSelectLang: any;
 }
 
 const LanguageContext = createContext<LanguageContextData>(
@@ -21,50 +18,31 @@ const LanguageContext = createContext<LanguageContextData>(
 );
 
 const LanguageProvider: React.FC = ({ children }) => {
-  // Pegar o locale por padrao o valor que esta salvo no localStorage, "en-US", "es-MX" ou "pt-BR"
   const [locale, setLocale] = useState<string>(() => {
-    const storagedLocale = localStorage.getItem('@react-intl: locale');
+    const storagedLocale = localStorage.getItem('@i18next: locale');
 
     if (storagedLocale) {
       return JSON.parse(storagedLocale);
     }
   });
 
-  let lang;
+  const handleSelectLang = useCallback((e) => {
+    const lang = e.target.value;
 
-  if (locale === 'en-US') {
-    lang = English;
-  } else if (locale === 'es-MX') {
-    lang = Spanish;
-  } else {
-    lang = Portuguese;
-  }
+    localStorage.setItem('@i18next: locale', JSON.stringify(lang));
 
-  const [messages, setMessages] = useState<any>(lang);
-
-  useEffect(() => {
-    localStorage.setItem('@react-intl: locale', JSON.stringify(locale));
-  }, [locale]);
-
-  const selectLang = useCallback((e) => {
-    const newLocale = e.target.value;
-
-    setLocale(newLocale);
-
-    if (newLocale === 'en-US') {
-      setMessages(English);
-    } else if (newLocale === 'es-MX') {
-      setMessages(Spanish);
-    } else {
-      setMessages(Portuguese);
-    }
+    setLocale(lang);
   }, []);
 
+  useEffect(() => {
+    setLocale(locale);
+
+    i18next.changeLanguage(locale);
+  }, [locale]);
+
   return (
-    <LanguageContext.Provider value={{ locale, selectLang }}>
-      <IntlProvider locale={locale} messages={messages}>
-        {children}
-      </IntlProvider>
+    <LanguageContext.Provider value={{ locale, handleSelectLang }}>
+      {children}
     </LanguageContext.Provider>
   );
 };

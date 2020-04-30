@@ -4,7 +4,7 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { useTranslation } from 'react-i18next';
 
 import api from '../../services/api';
 
@@ -16,7 +16,7 @@ import logo from '../../assets/logo.svg';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import LanguageSelect from '../../components/LanguageSelect';
+import SelectLanguage from '../../components/SelectLanguage';
 
 import { Container, Content, AnimationContainer, Background } from './styles';
 
@@ -28,6 +28,9 @@ interface SignUpFormData {
 
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+
+  const { t } = useTranslation();
+
   const { addToast } = useToast();
   const history = useHistory();
 
@@ -37,11 +40,11 @@ const SignUp: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          name: Yup.string().required('Nome obrigatório'),
+          name: Yup.string().required(`${t('Tooltip.name')}`),
           email: Yup.string()
-            .required('E-mail obrigatório')
-            .email('Digite um e-mail válido'),
-          password: Yup.string().min(6, 'No mínimo 6 dígitos'),
+            .required(`${t('Tooltip.emailRequired')}`)
+            .email(`${t('Tooltip.email')}`),
+          password: Yup.string().min(6, `${t('Tooltip.passwordMin')}`),
         });
 
         await schema.validate(data, {
@@ -56,8 +59,8 @@ const SignUp: React.FC = () => {
         // Colocar o toast de sucesso
         addToast({
           type: 'success',
-          title: 'Cadastro realizado',
-          description: 'Voce ja pode fazer seu logon no GoBarber!',
+          title: `${t('ToastContainer.SignUp.success.title')}`,
+          description: `${t('ToastContainer.SignUp.success.description')}`,
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -71,12 +74,12 @@ const SignUp: React.FC = () => {
         // Disparar um toast
         addToast({
           type: 'error',
-          title: 'Erro no cadastro',
-          description: 'Ocorreu um erro ao fazer cadastro, tente novamente.',
+          title: `${t('ToastContainer.SignUp.error.title')}`,
+          description: `${t('ToastContainer.SignUp.error.description')}`,
         });
       }
     },
-    [addToast, history],
+    [addToast, history, t],
   );
 
   return (
@@ -88,55 +91,37 @@ const SignUp: React.FC = () => {
           <img src={logo} alt="GoBarber" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>
-              <FormattedMessage
-                id="signup.header"
-                defaultMessage="Make your registration"
-              />
-            </h1>
+            <h1>{t('SignUp.header')}</h1>
 
-            <FormattedMessage
-              id="signup.inputPlaceholderName"
-              defaultMessage="Name"
-            >
-              {(placeholder: string) => (
-                <Input name="name" icon={FiUser} placeholder={placeholder} />
-              )}
-            </FormattedMessage>
+            <Input
+              name="name"
+              icon={FiUser}
+              placeholder={t('SignUp.inputPlaceholderName')}
+            />
 
-            <Input name="email" icon={FiMail} placeholder="E-mail" />
+            <Input
+              name="email"
+              icon={FiMail}
+              placeholder={t('SignUp.inputPlaceholderEmail')}
+            />
 
-            <FormattedMessage
-              id="signup.inputPlaceholderPassword"
-              defaultMessage="Password"
-            >
-              {(placeholder: string) => (
-                <Input
-                  name="password"
-                  icon={FiLock}
-                  type="password"
-                  placeholder={placeholder}
-                />
-              )}
-            </FormattedMessage>
+            <Input
+              name="password"
+              icon={FiLock}
+              type="password"
+              placeholder={t('SignUp.inputPlaceholderPassword')}
+            />
 
-            <Button type="submit">
-              <FormattedMessage
-                id="signup.buttonSignUp"
-                defaultMessage="Register"
-              />
-            </Button>
+            <Button type="submit">{t('SignUp.buttonSignUp')}</Button>
           </Form>
 
           <Link to="/">
             <FiArrowLeft />
-            <FormattedMessage
-              id="signup.buttonBackToLogon"
-              defaultMessage="Back to Login"
-            />
+
+            {t('SignUp.buttonBackToLogon')}
           </Link>
 
-          <LanguageSelect />
+          <SelectLanguage />
         </AnimationContainer>
       </Content>
     </Container>
