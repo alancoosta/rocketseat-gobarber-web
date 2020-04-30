@@ -21,9 +21,16 @@ const LanguageProvider: React.FC = ({ children }) => {
   const [locale, setLocale] = useState<string>(() => {
     const storagedLocale = localStorage.getItem('@i18next: locale');
 
+    const initialLanguage = 'pt-BR';
+
     if (storagedLocale) {
       return JSON.parse(storagedLocale);
     }
+
+    return localStorage.setItem(
+      '@i18next: locale',
+      JSON.stringify(initialLanguage),
+    );
   });
 
   const handleSelectLang = useCallback((e) => {
