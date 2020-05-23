@@ -1,13 +1,12 @@
 import React, { useCallback, useRef } from 'react';
-import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
+import { FiLock } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 
-import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 
 import getValidationErrors from '../../utils/getValidationErrors';
@@ -20,45 +19,55 @@ import Button from '../../components/Button';
 import SelectLanguage from '../../components/SelectLanguage';
 
 import { Container, Content, AnimationContainer, Background } from './styles';
+import api from '../../services/api';
 
-interface SignInFormData {
-  email: string;
+interface ResetPasswordFormData {
   password: string;
+  password_confirmation: string;
 }
 
-const SignIn: React.FC = () => {
+const ResetPassword: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const { t } = useTranslation();
 
-  const { signIn } = useAuth();
   const { addToast } = useToast();
 
   const history = useHistory();
+  const location = useLocation();
 
   const handleSubmit = useCallback(
-    async (data: SignInFormData) => {
+    async (data: ResetPasswordFormData) => {
       try {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          email: Yup.string()
-            .required(`${t('Tooltip.emailRequired')}`)
-            .email(`${t('Tooltip.email')}`),
           password: Yup.string().required(`${t('Tooltip.password')}`),
+          password_confirmation: Yup.string().oneOf(
+            [Yup.ref('password'), null],
+            'Confirmação incorreta',
+          ),
         });
 
         await schema.validate(data, {
           abortEarly: false, // Para nao parar no primeiro erro
         });
 
-        await signIn({
-          email: data.email,
-          password: data.password,
+        const { password, password_confirmation } = data;
+        const token = location.search.replace('?token=', ''); // O token vem assim, ?token=fd3d82a2-5aa0-479d-a46d-59c911a8f0f8, e fazer um replace para receber somente os caracteres, "fd3d82a2-5aa0-479d-a46d-59c911a8f0f8". E enviar o token no reset de senha, na chamada a api
+
+        // Se o token nao exitir
+        if (!token) {
+          throw new Error(); // Ele vai cair no erro padrao, vai cair no catch
+        }
+
+        await api.post('/password/reset', {
+          password,
+          password_confirmation,
+          token,
         });
 
-        // Depois de ser autenticado, vai ser enviado a rota de dashboard
-        history.push('/dashboard');
+        history.push('/');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -71,12 +80,12 @@ const SignIn: React.FC = () => {
         // Disparar um toast
         addToast({
           type: 'error',
-          title: `${t('ToastContainer.SignIn.error.title')}`,
-          description: `${t('ToastContainer.SignIn.error.description')}`,
+          title: 'Erro ao resetar senha',
+          description: 'Ocorreu um erro ao resetar sua senha, tente novamente',
         });
       }
     },
-    [signIn, addToast, history, t],
+    [addToast, history, location.search, t],
   );
 
   return (
@@ -85,30 +94,24 @@ const SignIn: React.FC = () => {
         <AnimationContainer>
           <img src={logo} alt="GoBarber" />
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>{t('SingIn.header')}</h1>
-
-            <Input
-              name="email"
-              icon={FiMail}
-              placeholder={t('SingIn.inputPlaceholderEmail')}
-            />
+            <h1>Resetar senha</h1>
 
             <Input
               name="password"
               icon={FiLock}
               type="password"
-              placeholder={t('SingIn.inputPlaceholderPassword')}
+              placeholder="Nova senha"
             />
 
-            <Button type="submit">{t('SingIn.createAccount')}</Button>
+            <Input
+              name="password_confirmation"
+              icon={FiLock}
+              type="password"
+              placeholder="Confirmação da senha"
+            />
 
-            <Link to="forgot-password">{t('SingIn.forgetPassword')}</Link>
+            <Button type="submit">Alterar senha</Button>
           </Form>
-
-          <Link to="/signup">
-            <FiLogIn />
-            <span>{t('SingIn.createAccount')}</span>
-          </Link>
 
           <SelectLanguage />
         </AnimationContainer>
@@ -119,4 +122,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default ResetPassword;
