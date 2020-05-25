@@ -40,7 +40,7 @@ const SignUp: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          name: Yup.string().required(`${t('Tooltip.name')}`),
+          name: Yup.string().required(`${t('Tooltip.nameRequired')}`),
           email: Yup.string()
             .required(`${t('Tooltip.emailRequired')}`)
             .email(`${t('Tooltip.email')}`),

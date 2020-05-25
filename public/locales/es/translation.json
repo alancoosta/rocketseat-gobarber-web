@@ -24,7 +24,7 @@
   },
 
   "Tooltip": {
-    "name": "Nombre requerido",
+    "nameRequired": "Nombre requerido",
 
     "emailRequired": "E-mail obrigatório",
     "email": "E-mail requerido",

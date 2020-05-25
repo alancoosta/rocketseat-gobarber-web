@@ -24,7 +24,7 @@
   },
 
   "Tooltip": {
-    "name": "필요한 이름",
+    "nameRequired": "필요한 이름",
 
     "emailRequired": "이메일 필요",
     "email": "유효한 이메일을 입력하십시오",

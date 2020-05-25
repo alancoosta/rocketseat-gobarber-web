@@ -24,7 +24,7 @@
   },
 
   "Tooltip": {
-    "name": "Nome obrigatório",
+    "nameRequired": "Nome obrigatório",
 
     "emailRequired": "E-mail obrigatório",
     "email": "Digite um e-mail válido",

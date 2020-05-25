@@ -5,6 +5,7 @@ import api from '../services/api';
 interface User {
   id: string;
   name: string;
+  email: string;
   avatar_url: string;
 }
 
@@ -22,6 +23,7 @@ interface AuthContextData {
   user: User;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
+  updateUser(user: User): void;
 }
 
 // usou as AuthContext para burlar o erro
@@ -73,8 +75,23 @@ const AuthProvider: React.FC = ({ children }) => {
     setData({} as AuthState);
   }, []);
 
+  // Atualizar a imagem e o perfil do usuario
+  const updateUser = useCallback(
+    (user: User) => {
+      localStorage.setItem('@GoBarber:user', JSON.stringify(user)); // E precisa atualizar essa informacoes do avatar no localStorage tambem, se nao o react vai buscar por uma {user.avatar_url} que nao existe na img na pagina profile
+
+      setData({
+        token: data.token,
+        user,
+      });
+    },
+    [setData, data.token],
+  );
+
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user: data.user, signIn, signOut, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

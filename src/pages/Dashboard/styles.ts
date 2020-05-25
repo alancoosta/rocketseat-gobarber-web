@@ -52,8 +52,13 @@ export const Profile = styled.div`
       color: #f4ede8;
     }
 
-    strong {
+    a {
+      text-decoration: none;
       color: #ff9000;
+
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 `;
@@ -266,7 +271,7 @@ export const Calendar = styled.aside`
     background: ${shade(0.2, '#3e3b47')};
 
     &:hover {
-      animation: ${growInDay} 0.5s;
+      animation: ${growInDay} 0.5s !important;
     }
   }
 
