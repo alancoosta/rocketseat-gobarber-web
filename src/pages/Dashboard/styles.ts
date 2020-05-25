@@ -266,12 +266,40 @@ export const Calendar = styled.aside`
     color: #fff;
   }
 
+  .DayPicker-Day--available:not(.DayPicker-Day--outside):not(.DayPicker-Day--disabled):not(.DayPicker--interactionDisabled) {
+    background: #3e3b47;
+    border-radius: 10px;
+    color: #fff;
+    animation: ${growInDay} 0.8s;
+
+    &:nth-child(2) {
+      animation-delay: 0s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.1s;
+    }
+
+    &:nth-child(4) {
+      animation-delay: 0.12s;
+    }
+
+    &:nth-child(5) {
+      animation-delay: 0.13s;
+    }
+
+    &:nth-child(6) {
+      animation-delay: 0.14s;
+    }
+  }
+
   .DayPicker:not(.DayPicker--interactionDisabled)
-    .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
-    background: ${shade(0.2, '#3e3b47')};
+    .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+    transition: transform 0.1s ease-in-out;
 
     &:hover {
-      animation: ${growInDay} 0.5s !important;
+      background: ${shade(0.2, '#3e3b47')};
+      transform: scale(1.2);
     }
   }
 
