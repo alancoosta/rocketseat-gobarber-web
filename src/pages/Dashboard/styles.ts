@@ -1,6 +1,34 @@
 import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 
+const growInDay = keyframes`
+  0% {
+    opacity: 0.5;
+    transform: scale(0.5)
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2)
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1)
+  }
+`;
+
+const appearFromLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-300px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
 export const Container = styled.div``;
 
 export const Header = styled.header`
@@ -173,6 +201,35 @@ export const Section = styled.section`
 export const Appointment = styled.div`
   display: flex;
   align-items: center;
+  /* animation: ${appearFromLeft} 1s; */
+
+  /* &:nth-child(2) {
+    animation-delay: 0s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.5s;
+  }
+
+  &:nth-child(4) {
+    animation-delay: 1s;
+  }
+
+  &:nth-child(5) {
+    animation-delay: 1.5s;
+  }
+
+  &:nth-child(6) {
+    animation-delay: 2s;
+  }
+
+  &:nth-child(7) {
+    animation-delay: 2.5s;
+  }
+
+  &:nth-child(8) {
+    animation-delay: 3s;
+  } */
 
   /**Vai colocar um margin-top, somente se tiver uma div Appointment depois de uma div Appointment, ou seja, 1-divAppointment sem margin-top, 2-divAppointment com margin-top, 3-divAppointment com margin-top e assim por diante  */
   & + div {
@@ -212,23 +269,6 @@ export const Appointment = styled.div`
       color: #fff;
       font-size: 20px;
     }
-  }
-`;
-
-const growInDay = keyframes`
-  0% {
-    opacity: 0.5;
-    transform: scale(0.5)
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.2)
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1)
   }
 `;
 
