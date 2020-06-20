@@ -97,9 +97,10 @@ const ForgotPassword: React.FC = () => {
               name="email"
               icon={FiMail}
               placeholder={t('SingIn.inputPlaceholderEmail')}
+              data-testid="emailField"
             />
 
-            <Button loading={loading} type="submit">
+            <Button loading={loading} type="submit" data-testid="buttonRecover">
               Recuperar
             </Button>
           </Form>

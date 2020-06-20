@@ -87,20 +87,16 @@ const SignIn: React.FC = () => {
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>{t('SingIn.header')}</h1>
 
-            <Input
-              name="email"
-              icon={FiMail}
-              placeholder={t('SingIn.inputPlaceholderEmail')}
-            />
+            <Input name="email" icon={FiMail} placeholder="E-mail" />
 
             <Input
               name="password"
               icon={FiLock}
               type="password"
-              placeholder={t('SingIn.inputPlaceholderPassword')}
+              placeholder="Senha"
             />
 
-            <Button type="submit">{t('SingIn.createAccount')}</Button>
+            <Button type="submit">Entrar</Button>
 
             <Link to="forgot-password">{t('SingIn.forgetPassword')}</Link>
           </Form>

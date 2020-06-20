@@ -54,6 +54,7 @@ const ResetPassword: React.FC = () => {
         });
 
         const { password, password_confirmation } = data;
+
         const token = location.search.replace('?token=', ''); // O token vem assim, ?token=fd3d82a2-5aa0-479d-a46d-59c911a8f0f8, e fazer um replace para receber somente os caracteres, "fd3d82a2-5aa0-479d-a46d-59c911a8f0f8". E enviar o token no reset de senha, na chamada a api
 
         // Se o token nao exitir
@@ -101,6 +102,7 @@ const ResetPassword: React.FC = () => {
               icon={FiLock}
               type="password"
               placeholder="Nova senha"
+              data-testid="newPasswordField"
             />
 
             <Input
@@ -108,9 +110,12 @@ const ResetPassword: React.FC = () => {
               icon={FiLock}
               type="password"
               placeholder="Confirmação da senha"
+              data-testid="confirmPasswordField"
             />
 
-            <Button type="submit">Alterar senha</Button>
+            <Button type="submit" data-testid="buttonChangePassword">
+              Alterar senha
+            </Button>
           </Form>
 
           <SelectLanguage />

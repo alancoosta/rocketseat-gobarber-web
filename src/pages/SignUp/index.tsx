@@ -97,12 +97,14 @@ const SignUp: React.FC = () => {
               name="name"
               icon={FiUser}
               placeholder={t('SignUp.inputPlaceholderName')}
+              data-testid="nameField"
             />
 
             <Input
               name="email"
               icon={FiMail}
               placeholder={t('SignUp.inputPlaceholderEmail')}
+              data-testid="emailField"
             />
 
             <Input
@@ -110,9 +112,12 @@ const SignUp: React.FC = () => {
               icon={FiLock}
               type="password"
               placeholder={t('SignUp.inputPlaceholderPassword')}
+              data-testid="passowordField"
             />
 
-            <Button type="submit">{t('SignUp.buttonSignUp')}</Button>
+            <Button type="submit" data-testid="buttonSubmit">
+              {t('SignUp.buttonSignUp')}
+            </Button>
           </Form>
 
           <Link to="/">
