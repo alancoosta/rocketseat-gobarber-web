@@ -47,11 +47,11 @@ describe('SignIn Page', () => {
     const { getByPlaceholderText, getByText } = render(<SignIn />);
 
     const emailField = getByPlaceholderText('E-mail');
-    const passworldField = getByPlaceholderText('Senha');
+    const passwordField = getByPlaceholderText('Senha');
     const buttonElement = getByText('Entrar');
 
     fireEvent.change(emailField, { target: { value: 'johndoe@example.com' } });
-    fireEvent.change(passworldField, { target: { value: '123456' } });
+    fireEvent.change(passwordField, { target: { value: '123456' } });
 
     fireEvent.click(buttonElement);
 
@@ -65,11 +65,11 @@ describe('SignIn Page', () => {
     const { getByPlaceholderText, getByText } = render(<SignIn />);
 
     const emailField = getByPlaceholderText('E-mail');
-    const passworldField = getByPlaceholderText('Senha');
+    const passwordField = getByPlaceholderText('Senha');
     const buttonElement = getByText('Entrar');
 
     fireEvent.change(emailField, { target: { value: 'not-valid-email' } });
-    fireEvent.change(passworldField, { target: { value: '123456' } });
+    fireEvent.change(passwordField, { target: { value: '123456' } });
 
     fireEvent.click(buttonElement);
 
@@ -88,11 +88,11 @@ describe('SignIn Page', () => {
     const { getByPlaceholderText, getByText } = render(<SignIn />);
 
     const emailField = getByPlaceholderText('E-mail');
-    const passworldField = getByPlaceholderText('Senha');
+    const passwordField = getByPlaceholderText('Senha');
     const buttonElement = getByText('Entrar');
 
     fireEvent.change(emailField, { target: { value: 'johndoe@example.com' } });
-    fireEvent.change(passworldField, { target: { value: '123456' } });
+    fireEvent.change(passwordField, { target: { value: '123456' } });
 
     fireEvent.click(buttonElement);
 

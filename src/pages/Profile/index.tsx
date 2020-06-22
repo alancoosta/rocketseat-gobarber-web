@@ -176,9 +176,19 @@ const Profile: React.FC = () => {
 
           <h1>Meu Perfil</h1>
 
-          <Input name="name" icon={FiUser} placeholder="Nome" />
+          <Input
+            name="name"
+            icon={FiUser}
+            placeholder="Nome"
+            data-testid="nameField"
+          />
 
-          <Input name="email" icon={FiMail} placeholder="Email" />
+          <Input
+            name="email"
+            icon={FiMail}
+            placeholder="Email"
+            data-testid="emailField"
+          />
 
           <Input
             containerStyle={{ marginTop: 24 }}
@@ -186,6 +196,7 @@ const Profile: React.FC = () => {
             icon={FiLock}
             type="password"
             placeholder="Senha atual"
+            data-testid="oldPasswordField"
           />
 
           <Input
@@ -193,6 +204,7 @@ const Profile: React.FC = () => {
             icon={FiLock}
             type="password"
             placeholder="Nova senha"
+            data-testid="passwordField"
           />
 
           <Input
@@ -200,9 +212,12 @@ const Profile: React.FC = () => {
             icon={FiLock}
             type="password"
             placeholder="Confirmar senha"
+            data-testid="passwordConfirmationField"
           />
 
-          <Button type="submit">Confirmar mudanças</Button>
+          <Button type="submit" data-testid="buttonSubmit">
+            Confirmar mudanças
+          </Button>
         </Form>
       </Content>
     </Container>
