@@ -170,7 +170,12 @@ const Profile: React.FC = () => {
             <label htmlFor="avatar">
               <FiCamera />
 
-              <input type="file" id="avatar" onChange={handleAvatarChange} />
+              <input
+                type="file"
+                id="avatar"
+                onChange={handleAvatarChange}
+                data-testid="input-file"
+              />
             </label>
           </AvatarInput>
 

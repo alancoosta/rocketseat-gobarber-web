@@ -152,7 +152,7 @@ const Dashboard: React.FC = () => {
             </div>
           </S.Profile>
 
-          <button type="button" onClick={signOut}>
+          <button type="button" onClick={signOut} data-testid="button-signOut">
             <FiPower />
           </button>
         </S.HeaderContent>
@@ -241,7 +241,7 @@ const Dashboard: React.FC = () => {
           </S.Section>
         </S.Schedule>
 
-        <S.Calendar>
+        <S.Calendar data-testid="day-picker">
           <DayPicker
             weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
             fromMonth={new Date()}

@@ -67,7 +67,7 @@ describe('ForgotPassword page', () => {
     const emailField = getByTestId('emailField');
     const buttonRecover = getByTestId('buttonRecover');
 
-    fireEvent.change(emailField, { target: { value: 'not-valid-password' } });
+    fireEvent.change(emailField, { target: { value: 'not-valid-email' } });
 
     fireEvent.click(buttonRecover);
 
@@ -77,9 +77,9 @@ describe('ForgotPassword page', () => {
   });
 
   // it('should display toast error when recover password fails', async () => {
-  //   apiMock.onPost('password/forgot').replyOnce(400);
-
   //   const { getByTestId } = render(<ForgotPassword />);
+
+  //   apiMock.onPost('/password/forgot').replyOnce(500);
 
   //   const emailField = getByTestId('emailField');
   //   const buttonRecover = getByTestId('buttonRecover');
